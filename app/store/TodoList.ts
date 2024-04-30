@@ -18,6 +18,8 @@ class TodoStore {
             todos: observable,
             currentId: observable,
             addTodo: action,
+            removeTodo: action,
+            updateTodo: action,
             unfinishedTodoCount: computed
         })
 
@@ -25,7 +27,7 @@ class TodoStore {
         this.currentId= 0
 
     }
-    
+
     get unfinishedTodoCount() {
         return this.todos.filter(todo => !todo.checked).length
     }
@@ -43,12 +45,24 @@ class TodoStore {
         }
     }
 
-    // removeTodo(id:number):void {
-    //     const index = this.todo.findIndex((v)=>v.id == id);
-    //     if(id !==-1){
-    //         this.todo.
-    //     }
-    // }
+    removeTodo(id:number):void {
+        const index = this.todos.findIndex((v)=>v.id == id);
+        if(id !==-1){
+            this.todos.splice(index)
+       }
+    }
+
+    updateTodo(id: number, title: string, content: string){
+        const index = this.todos.findIndex((v)=>v.id == id);
+        if(id !== -1){
+            if(title != null){
+                this.todos[index].title = title;
+            }
+            else if(content != null){
+                this.todos[index].content = content;
+            }
+        }
+    }
 }
 
 

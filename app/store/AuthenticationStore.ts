@@ -10,7 +10,8 @@ class Authentication {
             idtoken: observable,
             accesstoken: observable,
             refreshtoken: observable,
-            setToken: action
+            setToken: action,
+            refreshAccessToken: action
         })
     }
 
@@ -18,6 +19,22 @@ class Authentication {
         this.idtoken = idtoken
         this.accesstoken = accesstoken
         this.refreshtoken = refreshtoken
+    }
+
+    refreshAccessToken(accesstoken: string){
+        this.accesstoken = accesstoken;
+    }
+
+    get getIdToken(){
+        return this.idtoken;
+    }
+
+    get getAccessToken(){
+        return this.accesstoken;
+    }
+
+    get getRefreshToken(){
+        return this.refreshtoken;
     }
 }
 
