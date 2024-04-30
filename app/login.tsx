@@ -1,16 +1,16 @@
 import { Alert, Button, StyleSheet, Text, View } from "react-native";
 import { Redirect } from "expo-router";
-import { useEffect, useState } from "react";
+import { useEffect, useState, FC } from "react";
 import { observer } from "mobx-react-lite"
 import LoginButton from "@/components/LoginButton";
 import Logo from "@/components/Logo";
-import { Authentication } from "./models/AuthenticationStore";
+import { Authentication } from "./store/AuthenticationStore";
 import { useAuth0 } from "react-native-auth0";
 
 
 const AuthenticationStore = new Authentication();
 
-export default function LoginScreen(){
+export const LoginScreen: FC = observer(function LoginScreen(_props){
   const { authorize, user, getCredentials} = useAuth0();
 
   const [ idtoken, SetidToken ] = useState("")
@@ -42,7 +42,7 @@ export default function LoginScreen(){
       </>
     );
   }
-}
+});
 
 const styles = StyleSheet.create({
   input: {
