@@ -1,8 +1,8 @@
-import { Authentication } from "./AuthenticationStore";
+import { AuthenticationStore } from "./AuthenticationStore";
 
 const createRootStore = () => {
     return {
-        Authentication
+        AuthenticationStore
     };
 }
 

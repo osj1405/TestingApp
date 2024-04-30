@@ -1,4 +1,4 @@
-import { action, makeAutoObservable, observable } from "mobx";
+import { action, comparer, computed, makeAutoObservable, observable } from "mobx";
 
 export interface Todo {
     id : number;
@@ -9,32 +9,37 @@ export interface Todo {
 
 class TodoStore {
 
-    todo: Todo[];
+    todos: Todo[];
     currentId: number;
 
     constructor() {
 
         makeAutoObservable(this, {
-            todo: observable,
+            todos: observable,
             currentId: observable,
-            addTodo: action
+            addTodo: action,
+            unfinishedTodoCount: computed
         })
 
-        this.todo = []
+        this.todos = []
         this.currentId= 0
 
     }
     
+    get unfinishedTodoCount() {
+        return this.todos.filter(todo => !todo.checked).length
+    }
+
     addTodo(title: string, content:string):void {
 
-        this.todo.push({id: this.currentId, title, content, checked:false})
+        this.todos.push({id: this.currentId, title, content, checked:false})
         this.currentId++;
     }
 
     toggleTodo(id:number):void {
-        const index = this.todo.findIndex((v)=>v.id===id);
+        const index = this.todos.findIndex((v)=>v.id===id);
         if(id !== -1) {
-            this.todo[index].checked = !this.todo[index].checked
+            this.todos[index].checked = !this.todos[index].checked
         }
     }
 

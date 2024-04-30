@@ -1,6 +1,6 @@
 import { observable, action, computed, makeAutoObservable } from "mobx";
 
-export class Authentication {
+class Authentication {
     idtoken=""
     accesstoken = ""
     refreshtoken = ""
@@ -20,3 +20,5 @@ export class Authentication {
         this.refreshtoken = refreshtoken
     }
 }
+
+export const  AuthenticationStore = new Authentication();

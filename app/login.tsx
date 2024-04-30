@@ -4,11 +4,9 @@ import { useEffect, useState, FC } from "react";
 import { observer } from "mobx-react-lite"
 import LoginButton from "@/components/LoginButton";
 import Logo from "@/components/Logo";
-import { Authentication } from "./store/AuthenticationStore";
+import { AuthenticationStore } from "./store/AuthenticationStore";
 import { useAuth0 } from "react-native-auth0";
 
-
-const AuthenticationStore = new Authentication();
 
 export const LoginScreen: FC = observer(function LoginScreen(_props){
   const { authorize, user, getCredentials} = useAuth0();
